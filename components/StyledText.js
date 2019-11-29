@@ -1,8 +1,11 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-export function MonoText(props) {
+export default function MonoText(props) {
+  // eslint-disable-next-line react/prop-types
+  const { style } = props;
   return (
-    <Text {...props} style={[props.style, { fontFamily: 'space-mono' }]} />
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Text {...props} style={[style, { fontFamily: 'PatrickHandSC-Regular' }]} />
   );
 }

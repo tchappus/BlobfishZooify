@@ -1,6 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -16,21 +20,27 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
   },
-  config
+  config,
 );
+
+const HomeStackTabBarIcon = ({ focused }) => (
+  <TabBarIcon
+    focused={focused}
+    name={
+      Platform.OS === 'ios'
+        ? `ios-information-circle${focused ? '' : '-outline'}`
+        : 'md-information-circle'
+    }
+  />
+);
+
+HomeStackTabBarIcon.propTypes = {
+  focused: PropTypes.objectOf(PropTypes.bool).isRequired,
+};
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+  tabBarIcon: HomeStackTabBarIcon,
 };
 
 HomeStack.path = '';
@@ -39,14 +49,23 @@ const LinksStack = createStackNavigator(
   {
     Links: LinksScreen,
   },
-  config
+  config,
 );
+
+const LinksStackTabBarIcon = ({ focused }) => (
+  <TabBarIcon
+    focused={focused}
+    name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+  />
+);
+
+LinksStackTabBarIcon.propTypes = {
+  focused: PropTypes.objectOf(PropTypes.bool).isRequired,
+};
 
 LinksStack.navigationOptions = {
   tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
+  tabBarIcon: LinksStackTabBarIcon,
 };
 
 LinksStack.path = '';
@@ -55,14 +74,23 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
   },
-  config
+  config,
 );
+
+const SettingsStackTabBarIcon = ({ focused }) => (
+  <TabBarIcon
+    focused={focused}
+    name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+  />
+);
+
+SettingsStackTabBarIcon.propTypes = {
+  focused: PropTypes.objectOf(PropTypes.bool).isRequired,
+};
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
+  tabBarIcon: SettingsStackTabBarIcon,
 };
 
 SettingsStack.path = '';
