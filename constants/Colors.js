@@ -11,4 +11,13 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
+  torontoBackground: '#ECECEC',
+  torontoGrey: '#979797',
+  torontoGreen: '#0E9748',
+  torontoMagenta: '#B01F8C',
+  torontoPurple: '#551091',
+  torontoRed: '#E5151C',
+  torontoBrown: '#B56B29',
+  torontoOrange: '#F5721B',
+  torontoTeal: '#3698A6',
 };

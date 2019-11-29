@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
@@ -8,19 +7,28 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+import Colors from './constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.torontoBackground,
   },
 });
 
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
+      require('./assets/images/anicons/anicons-African-Savanna.png'),
+      require('./assets/images/anicons/anicons-Americas.png'),
+      require('./assets/images/anicons/anicons-Australasia.png'),
+      require('./assets/images/anicons/anicons-Canadian-DOmain.png'),
+      require('./assets/images/anicons/anicons-Discovery-Zone.png'),
+      require('./assets/images/anicons/anicons-Eurasia-Wilds.png'),
+      require('./assets/images/anicons/anicons-Indo-Malaya.png'),
+      require('./assets/images/anicons/anicons-Tundra-Trek.png'),
+      require('./assets/images/anicons/anicons-Plants.png'),
+      require('./assets/images/anicons/Wased-ashore-solid.png'),
     ]),
     Font.loadAsync({
       // tab bar font
