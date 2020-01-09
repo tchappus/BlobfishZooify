@@ -20,4 +20,5 @@ export default {
   torontoBrown: '#B56B29',
   torontoOrange: '#F5721B',
   torontoTeal: '#3698A6',
+  black: '#000000',
 };
