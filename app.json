@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.Blobfish.Zooify"
+    },
+    "android": {
+      "package": "com.Blobfish.Zooify"
     }
   }
 }

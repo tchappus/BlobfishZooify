@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function HomeScreen() {
+export default function HomeScreen(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
       <ScrollView
@@ -48,7 +49,7 @@ export default function HomeScreen() {
           <Text style={styles.headerText}>Search</Text>
           <Text style={styles.regularText}>for an animal</Text>
           <SearchBar />
-          <TakePhotoButton />
+          <TakePhotoButton navigation={navigation} />
         </View>
         <View style={styles.homeScreenSection}>
           <Text style={{ ...styles.headerText, ...styles.hPadding }}>

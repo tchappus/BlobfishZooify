@@ -1,6 +1,8 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
 
 import Fonts from '../../constants/Fonts';
 import Colors from '../../constants/Colors';
@@ -25,9 +27,13 @@ const styles = {
   },
 };
 
-export default function TakePhotoButton() {
+export default function TakePhotoButton(props) {
+  const { navigation } = props;
   return (
-    <TouchableOpacity style={styles.view}>
+    <TouchableOpacity
+      style={styles.view}
+      onPress={() => navigation.navigate('Camera')}
+    >
       <Ionicons
         name="ios-camera"
         size={26}
@@ -38,3 +44,8 @@ export default function TakePhotoButton() {
     </TouchableOpacity>
   );
 }
+
+TakePhotoButton.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  navigation: PropTypes.object,
+};

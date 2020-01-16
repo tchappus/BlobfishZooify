@@ -22,6 +22,7 @@ const styles = {
     fontSize: 24,
     letterSpacing: -1,
     color: Colors.black,
+    flex: 1,
   },
   placeholder: {
     fontFamily: Fonts.regular,
@@ -51,6 +52,9 @@ export default function BfInput(props) {
         }}
         onFocus={() => {
           if (value === placeholder) onChangeText('');
+        }}
+        onEndEditing={() => {
+          if (value === '') onChangeText(placeholder);
         }}
         value={value}
       />
