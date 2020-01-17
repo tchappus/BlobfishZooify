@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 import Colors from '../constants/Colors';
 import Fonts from '../constants/Fonts';
@@ -49,7 +50,7 @@ export default function HomeScreen(props) {
           <Text style={styles.headerText}>Search</Text>
           <Text style={styles.regularText}>for an animal</Text>
           <SearchBar />
-          <TakePhotoButton navigation={navigation} />
+          <TakePhotoButton nav={navigation} />
         </View>
         <View style={styles.homeScreenSection}>
           <Text style={{ ...styles.headerText, ...styles.hPadding }}>
@@ -87,4 +88,10 @@ export default function HomeScreen(props) {
 
 HomeScreen.navigationOptions = {
   header: null,
+};
+
+HomeScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };

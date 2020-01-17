@@ -1,11 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
+import PropTypes from 'prop-types';
 
-export default function CameraScreen() {
+import Colors from '../constants/Colors';
+
+const styles = {
+  button: {
+    backgroundColor: 'white',
+    height: 80,
+    width: 80,
+    borderColor: Colors.torontoGrey,
+    borderWidth: 2,
+    borderRadius: 40,
+    padding: 10,
+    marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+  },
+};
+
+export default function CameraScreen(props) {
   const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+  const { navigation } = props;
+
+  let camera = null;
+  const options = {
+    quality: 0.6,
+    exif: true,
+  };
 
   useEffect(() => {
     (async () => {
@@ -22,35 +49,38 @@ export default function CameraScreen() {
   }
   return (
     <View style={{ flex: 1 }}>
-      <Camera style={{ flex: 1 }} type={type}>
+      <Camera
+        style={{ flex: 1 }}
+        type={Camera.Constants.Type.back}
+        ref={ref => {
+          camera = ref;
+        }}
+      >
         <View
           style={{
             flex: 1,
             backgroundColor: 'transparent',
             flexDirection: 'row',
+            justifyContent: 'center',
           }}
         >
           <TouchableOpacity
-            style={{
-              flex: 0.1,
-              alignSelf: 'flex-end',
-              alignItems: 'center',
-            }}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back,
-              );
+            style={styles.button}
+            onPress={async () => {
+              const { uri } = await camera.takePictureAsync(options);
+              navigation.navigate('Image', { uri });
             }}
           >
-            <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-              {' '}
-              Flip{' '}
-            </Text>
+            <Ionicons name="ios-camera" size={40} color={Colors.torontoGrey} />
           </TouchableOpacity>
         </View>
       </Camera>
     </View>
   );
 }
+
+CameraScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
