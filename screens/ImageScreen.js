@@ -22,6 +22,7 @@ const styles = {
 export default function ImageScreen(props) {
   const { navigation } = props;
   const uri = navigation.getParam('uri');
+  console.log('test');
   return (
     <View>
       <ImageBackground style={styles.image} source={{ uri }}>
@@ -30,7 +31,30 @@ export default function ImageScreen(props) {
             style={styles.button}
             icon="ios-qr-scanner"
             label="Identify"
-            onPress={() => {}}
+            onPress={async () => {
+              const image = {
+                uri,
+                type: 'image/jpeg',
+                name: 'photo.jpg',
+              };
+
+              const formData = new FormData();
+              formData.append('image', image);
+
+              const response = await fetch(
+                'http://localhost:5000/WeatherForecast',
+                {
+                  method: 'POST',
+                  mode: 'cors',
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+                  body: formData,
+                },
+              );
+              const text = await response.text();
+              console.log(text);
+            }}
           />
           <BfButton
             style={styles.button}
