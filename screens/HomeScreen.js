@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.torontoBackground,
+    paddingTop: 10,
+    paddingHorizontal: 5,
   },
   headerText: {
     fontFamily: Fonts.bold,

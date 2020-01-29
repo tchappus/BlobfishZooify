@@ -31,30 +31,32 @@ export default function ImageScreen(props) {
             style={styles.button}
             icon="ios-qr-scanner"
             label="Identify"
-            onPress={async () => {
-              const image = {
-                uri,
-                type: 'image/jpeg',
-                name: 'photo.jpg',
-              };
+            // Commented out for testing
+            // onPress={async () => {
+            //   const image = {
+            //     uri,
+            //     type: 'image/jpeg',
+            //     name: 'photo.jpg',
+            //   };
 
-              const formData = new FormData();
-              formData.append('image', image);
+            //   const formData = new FormData();
+            //   formData.append('image', image);
 
-              const response = await fetch(
-                'http://localhost:5000/WeatherForecast',
-                {
-                  method: 'POST',
-                  mode: 'cors',
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                  },
-                  body: formData,
-                },
-              );
-              const text = await response.text();
-              console.log(text);
-            }}
+            //   const response = await fetch(
+            //     'http://localhost:5000/WeatherForecast',
+            //     {
+            //       method: 'POST',
+            //       mode: 'cors',
+            //       headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //       },
+            //       body: formData,
+            //     },
+            //   );
+            //   const text = await response.text();
+            //   console.log(text);
+            // }}
+            onPress={() => navigation.navigate('Results')}
           />
           <BfButton
             style={styles.button}
@@ -71,5 +73,6 @@ export default function ImageScreen(props) {
 ImageScreen.propTypes = {
   navigation: PropTypes.shape({
     getParam: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
   }).isRequired,
 };

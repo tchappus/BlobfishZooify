@@ -12,6 +12,7 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import CameraScreen from '../screens/CameraScreen';
 import ImageScreen from '../screens/ImageScreen';
+import ResultScreen from '../screens/ResultScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -23,6 +24,7 @@ const HomeStack = createStackNavigator(
     Home: HomeScreen,
     Camera: CameraScreen,
     Image: ImageScreen,
+    Results: ResultScreen,
   },
   config,
 );
