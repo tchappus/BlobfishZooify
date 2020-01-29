@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
+import { SafeAreaView } from 'react-navigation';
 import BfButton from '../components/BfButton';
 
 const styles = {
@@ -24,49 +25,51 @@ export default function ImageScreen(props) {
   const uri = navigation.getParam('uri');
   console.log('test');
   return (
-    <View>
-      <ImageBackground style={styles.image} source={{ uri }}>
-        <View style={styles.view}>
-          <BfButton
-            style={styles.button}
-            icon="ios-qr-scanner"
-            label="Identify"
-            // Commented out for testing
-            // onPress={async () => {
-            //   const image = {
-            //     uri,
-            //     type: 'image/jpeg',
-            //     name: 'photo.jpg',
-            //   };
+    <SafeAreaView>
+      <View>
+        <ImageBackground style={styles.image} source={{ uri }}>
+          <View style={styles.view}>
+            <BfButton
+              style={styles.button}
+              icon="ios-qr-scanner"
+              label="Identify"
+              // Commented out for testing
+              // onPress={async () => {
+              //   const image = {
+              //     uri,
+              //     type: 'image/jpeg',
+              //     name: 'photo.jpg',
+              //   };
 
-            //   const formData = new FormData();
-            //   formData.append('image', image);
+              //   const formData = new FormData();
+              //   formData.append('image', image);
 
-            //   const response = await fetch(
-            //     'http://localhost:5000/WeatherForecast',
-            //     {
-            //       method: 'POST',
-            //       mode: 'cors',
-            //       headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //       },
-            //       body: formData,
-            //     },
-            //   );
-            //   const text = await response.text();
-            //   console.log(text);
-            // }}
-            onPress={() => navigation.navigate('Results')}
-          />
-          <BfButton
-            style={styles.button}
-            icon="ios-save"
-            label="Save"
-            onPress={() => {}}
-          />
-        </View>
-      </ImageBackground>
-    </View>
+              //   const response = await fetch(
+              //     'http://localhost:5000/WeatherForecast',
+              //     {
+              //       method: 'POST',
+              //       mode: 'cors',
+              //       headers: {
+              //         'Content-Type': 'multipart/form-data',
+              //       },
+              //       body: formData,
+              //     },
+              //   );
+              //   const text = await response.text();
+              //   console.log(text);
+              // }}
+              onPress={() => navigation.navigate('Results')}
+            />
+            <BfButton
+              style={styles.button}
+              icon="ios-save"
+              label="Save"
+              onPress={() => {}}
+            />
+          </View>
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 }
 
