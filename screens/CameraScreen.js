@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
@@ -49,40 +48,34 @@ export default function CameraScreen(props) {
     return <Text>No access to camera</Text>;
   }
   return (
-    <SafeAreaView>
-      <View style={{ flex: 1 }}>
-        <Camera
-          style={{ flex: 1 }}
-          type={Camera.Constants.Type.back}
-          ref={ref => {
-            camera = ref;
+    <View style={{ flex: 1 }}>
+      <Camera
+        style={{ flex: 1 }}
+        type={Camera.Constants.Type.back}
+        ref={ref => {
+          camera = ref;
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'transparent',
+            flexDirection: 'row',
+            justifyContent: 'center',
           }}
         >
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: 'transparent',
-              flexDirection: 'row',
-              justifyContent: 'center',
+          <TouchableOpacity
+            style={styles.button}
+            onPress={async () => {
+              const { uri } = await camera.takePictureAsync(options);
+              navigation.navigate('Image', { uri });
             }}
           >
-            <TouchableOpacity
-              style={styles.button}
-              onPress={async () => {
-                const { uri } = await camera.takePictureAsync(options);
-                navigation.navigate('Image', { uri });
-              }}
-            >
-              <Ionicons
-                name="ios-camera"
-                size={40}
-                color={Colors.torontoGrey}
-              />
-            </TouchableOpacity>
-          </View>
-        </Camera>
-      </View>
-    </SafeAreaView>
+            <Ionicons name="ios-camera" size={40} color={Colors.torontoGrey} />
+          </TouchableOpacity>
+        </View>
+      </Camera>
+    </View>
   );
 }
 
