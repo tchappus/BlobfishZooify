@@ -9,9 +9,9 @@ import {
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import ImageScreen from '../screens/ImageScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import CameraScreen from '../screens/CameraScreen';
-import ImageScreen from '../screens/ImageScreen';
 import ResultScreen from '../screens/ResultScreen';
 
 const config = Platform.select({
@@ -24,7 +24,7 @@ const HomeStack = createStackNavigator(
     Home: HomeScreen,
     Camera: CameraScreen,
     Image: ImageScreen,
-    Results: ResultScreen,
+    Result: ResultScreen,
   },
   config,
 );
@@ -109,4 +109,4 @@ const tabNavigator = createBottomTabNavigator({
 
 tabNavigator.path = '';
 
-export default tabNavigator;
+export default HomeStack;
