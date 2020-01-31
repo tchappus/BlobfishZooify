@@ -17,6 +17,22 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  disabledView: {
+    backgroundColor: Colors.torontoGrey,
+    height: 40,
+    borderColor: Colors.torontoGrey,
+    borderWidth: 2,
+    borderRadius: 8,
+    padding: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  disabledText: {
+    fontFamily: Fonts.regular,
+    fontSize: 24,
+    letterSpacing: -1,
+    color: 'white',
+  },
   text: {
     fontFamily: Fonts.regular,
     fontSize: 24,
@@ -26,30 +42,36 @@ const styles = {
 };
 
 export default function BfButton(props) {
-  const { icon, label, onPress, style } = props;
-  const viewStyle = { ...styles.view, ...style };
+  const { icon, label, onPress, style, disabled } = props;
+  const viewStyle = disabled
+    ? { ...styles.disabledView, ...style }
+    : { ...styles.view, ...style };
+  const textStyle = disabled ? styles.disabledText : styles.text;
+  const iconColor = disabled ? 'white' : Colors.torontoGrey;
 
   return (
-    <TouchableOpacity style={viewStyle} onPress={onPress}>
+    <TouchableOpacity style={viewStyle} onPress={onPress} disabled={disabled}>
       <Ionicons
         name={icon}
         size={26}
         style={{ marginBottom: -3, marginRight: 5 }}
-        color={Colors.torontoGrey}
+        color={iconColor}
       />
-      <Text style={styles.text}>{label}</Text>
+      <Text style={textStyle}>{label}</Text>
     </TouchableOpacity>
   );
 }
 
 BfButton.defaultProps = {
   style: null,
+  disabled: false,
 };
 
 BfButton.propTypes = {
   icon: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
   // eslint-disable-next-line react/forbid-prop-types
   style: PropTypes.object,
 };
