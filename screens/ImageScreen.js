@@ -80,6 +80,7 @@ function IdentifyButton(props) {
             },
           );
           const result = await response.text();
+          console.log(result);
           setIdentifying(false);
           nav.navigate('Result', { uri, result });
         }}

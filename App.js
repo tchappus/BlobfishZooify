@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
 import Colors from './constants/Colors';
+import ZooData from './utils/ZooData';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,8 +17,11 @@ const styles = StyleSheet.create({
   },
 });
 
+let animals = null;
+
 async function loadResourcesAsync() {
   await Promise.all([
+    (animals = ZooData()),
     Asset.loadAsync([
       require('./assets/images/anicons/anicons-African-Savanna.png'),
       require('./assets/images/anicons/anicons-Americas.png'),
@@ -64,6 +68,7 @@ export default function App(props) {
       />
     );
   }
+
   return (
     <View style={styles.container}>
       {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
@@ -73,6 +78,9 @@ export default function App(props) {
 }
 
 App.propTypes = {
-  // eslint-disable-next-line react/require-default-props
   skipLoadingScreen: PropTypes.bool,
+};
+
+App.defaultProps = {
+  skipLoadingScreen: false,
 };
