@@ -8,11 +8,14 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
+import ListScreen from '../screens/ListScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import CameraScreen from '../screens/CameraScreen';
 import ImageScreen from '../screens/ImageScreen';
 import ResultScreen from '../screens/ResultScreen';
+import AnimalScreen from '../screens/AnimalScreen';
+import SearchScreen from '../screens/SearchScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -22,6 +25,9 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    List: ListScreen,
+    Search: SearchScreen,
+    Animal: AnimalScreen,
     Camera: CameraScreen,
     Image: ImageScreen,
     Result: ResultScreen,

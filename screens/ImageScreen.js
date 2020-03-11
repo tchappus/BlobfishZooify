@@ -57,32 +57,32 @@ function IdentifyButton(props) {
         label="Identify"
         onPress={async () => {
           setIdentifying(true);
-          const uriParts = uri.split('.');
-          const fileType = uriParts[uriParts.length - 1];
-          const image = {
-            uri,
-            type: `image/${fileType}`,
-            name: `photo.${fileType}`,
-          };
+          // const uriParts = uri.split('.');
+          // const fileType = uriParts[uriParts.length - 1];
+          // const image = {
+          //   uri,
+          //   type: `image/${fileType}`,
+          //   name: `photo.${fileType}`,
+          // };
 
-          const formData = new FormData();
-          formData.append('image', image);
+          // const formData = new FormData();
+          // formData.append('image', image);
 
-          const response = await fetch(
-            'https://zooify20200130112611.azurewebsites.net/api/values',
-            {
-              method: 'POST',
-              mode: 'cors',
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-              body: formData,
-            },
-          );
-          const result = await response.text();
-          console.log(result);
+          // const response = await fetch(
+          //   'https://zooify20200130112611.azurewebsites.net/api/values',
+          //   {
+          //     method: 'POST',
+          //     mode: 'cors',
+          //     headers: {
+          //       'Content-Type': 'multipart/form-data',
+          //     },
+          //     body: formData,
+          //   },
+          // );
+          // const result = await response.text();
+          // console.log(result);
           setIdentifying(false);
-          nav.navigate('Result', { uri, result });
+          nav.navigate('Result', { uri, result: 'americanMoose' });
         }}
       />
     );

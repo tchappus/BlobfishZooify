@@ -68,11 +68,12 @@ export default function App(props) {
       />
     );
   }
-
+  // eslint-disable-next-line no-underscore-dangle
+  animals = animals._55;
   return (
     <View style={styles.container}>
       {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-      <AppNavigator />
+      <AppNavigator screenProps={animals} />
     </View>
   );
 }

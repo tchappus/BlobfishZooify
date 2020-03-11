@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
@@ -5,12 +6,8 @@ import PropTypes from 'prop-types';
 import Colors from '../constants/Colors';
 import Fonts from '../constants/Fonts';
 
-import {
-  SearchBar,
-  TakePhotoButton,
-  ExhibitScrollView,
-  TypeButton,
-} from '../components/home';
+import { SearchByNameButton, TakePhotoButton } from '../components/home';
+import ListButton from '../components/ListButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,7 +36,8 @@ const styles = StyleSheet.create({
 });
 
 export default function HomeScreen(props) {
-  const { navigation } = props;
+  const { screenProps, navigation } = props;
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -49,35 +47,117 @@ export default function HomeScreen(props) {
         <View style={{ ...styles.homeScreenSection, ...styles.hPadding }}>
           <Text style={styles.headerText}>Search</Text>
           <Text style={styles.regularText}>for an animal</Text>
-          <SearchBar />
-          <TakePhotoButton nav={navigation} />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              height: 90,
+            }}
+          >
+            <SearchByNameButton nav={navigation} />
+            <TakePhotoButton nav={navigation} />
+          </View>
         </View>
         <View style={styles.homeScreenSection}>
           <Text style={{ ...styles.headerText, ...styles.hPadding }}>
             By Exhibit
           </Text>
-          <ExhibitScrollView />
-        </View>
-        <View style={{ ...styles.homeScreenSection, ...styles.hPadding }}>
-          <Text style={styles.headerText}>By Type</Text>
-          <View style={{ flexDirection: 'row' }}>
-            <TypeButton
-              name="Reptile"
+          <View>
+            <ListButton
+              name="Africa"
+              src={require('../assets/images/anicons/anicons-African-Savanna.png')}
+              onPress={() => {
+                navigation.navigate('List', {
+                  navigation,
+                  image: require('../assets/images/anicons/anicons-African-Savanna.png'),
+                  title: 'Africa',
+                  items: screenProps.africa,
+                });
+              }}
+            />
+            <ListButton
+              name="Americas"
+              src={require('../assets/images/anicons/anicons-Americas.png')}
+              onPress={() => {
+                navigation.navigate('List', {
+                  navigation,
+                  image: require('../assets/images/anicons/anicons-Americas.png'),
+                  title: 'Americas',
+                  items: screenProps.americas,
+                });
+              }}
+            />
+            <ListButton
+              name="Australasia"
               src={require('../assets/images/anicons/anicons-Australasia.png')}
+              onPress={() => {
+                navigation.navigate('List', {
+                  navigation,
+                  image: require('../assets/images/anicons/anicons-Australasia.png'),
+                  title: 'Australasia',
+                  items: screenProps.australasia,
+                });
+              }}
             />
-            <TypeButton
-              name="Bird"
+            <ListButton
+              name="Canada"
+              src={require('../assets/images/anicons/anicons-Canadian-DOmain.png')}
+              onPress={() => {
+                navigation.navigate('List', {
+                  navigation,
+                  image: require('../assets/images/anicons/anicons-Canadian-DOmain.png'),
+                  title: 'Canada',
+                  items: screenProps.canada,
+                });
+              }}
+            />
+            <ListButton
+              name="Discovery"
               src={require('../assets/images/anicons/anicons-Discovery-Zone.png')}
+              onPress={() => {
+                navigation.navigate('List', {
+                  navigation,
+                  image: require('../assets/images/anicons/anicons-Discovery-Zone.png'),
+                  title: 'Discovery',
+                  items: screenProps.discovery,
+                });
+              }}
             />
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <TypeButton
-              name="Fish"
-              src={require('../assets/images/anicons/Wased-ashore-solid.png')}
+            <ListButton
+              name="Eurasia"
+              src={require('../assets/images/anicons/anicons-Eurasia-Wilds.png')}
+              onPress={() => {
+                navigation.navigate('List', {
+                  navigation,
+                  image: require('../assets/images/anicons/anicons-Eurasia-Wilds.png'),
+                  title: 'Eurasia',
+                  items: screenProps.eurasia,
+                });
+              }}
             />
-            <TypeButton
-              name="Mammal"
+            <ListButton
+              name="Indo-Malaya"
               src={require('../assets/images/anicons/anicons-Indo-Malaya.png')}
+              onPress={() => {
+                navigation.navigate('List', {
+                  navigation,
+                  image: require('../assets/images/anicons/anicons-Indo-Malaya.png'),
+                  title: 'Indo-Malaya',
+                  items: screenProps.indomalaya,
+                });
+              }}
+            />
+            <ListButton
+              name="Tundra"
+              src={require('../assets/images/anicons/anicons-Tundra-Trek.png')}
+              onPress={() => {
+                navigation.navigate('List', {
+                  navigation,
+                  image: require('../assets/images/anicons/anicons-Tundra-Trek.png'),
+                  title: 'Tundra',
+                  items: screenProps.tundra,
+                });
+              }}
             />
           </View>
         </View>

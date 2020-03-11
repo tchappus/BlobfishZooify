@@ -9,13 +9,14 @@ import Colors from '../constants/Colors';
 const styles = {
   view: {
     backgroundColor: 'white',
-    height: 40,
+    height: '100%',
     borderColor: Colors.torontoGrey,
     borderWidth: 2,
     borderRadius: 8,
     padding: 5,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   disabledView: {
     backgroundColor: Colors.torontoGrey,
@@ -38,6 +39,7 @@ const styles = {
     fontSize: 24,
     letterSpacing: -1,
     color: Colors.torontoGrey,
+    width: '70%',
   },
 };
 
@@ -53,8 +55,8 @@ export default function BfButton(props) {
     <TouchableOpacity style={viewStyle} onPress={onPress} disabled={disabled}>
       <Ionicons
         name={icon}
-        size={26}
-        style={{ marginBottom: -3, marginRight: 5 }}
+        size={32}
+        style={{ marginBottom: 10, padding: 20 }}
         color={iconColor}
       />
       <Text style={textStyle}>{label}</Text>

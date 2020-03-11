@@ -13,20 +13,20 @@ const styles = {
   },
 };
 
-export default function TakePhotoButton(props) {
+export default function SearchByNameButton(props) {
   const { nav } = props;
   return (
     <View style={styles.view}>
       <BfButton
-        icon="ios-camera"
-        label="Take Photo"
-        onPress={() => nav.navigate('Camera')}
+        icon="ios-search"
+        label="Find by Name"
+        onPress={() => nav.navigate('Search')}
       />
     </View>
   );
 }
 
-TakePhotoButton.propTypes = {
+SearchByNameButton.propTypes = {
   nav: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

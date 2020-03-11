@@ -197,6 +197,5 @@ export default async function LoadData() {
     animals.tundra[tundraAnimals[i]] = tundraAnimalsImages[i];
   }
 
-  console.log('test');
   return animals;
 }
