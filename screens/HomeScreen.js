@@ -1,15 +1,13 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
-
-import Colors from '../constants/Colors';
-import Fonts from '../constants/Fonts';
+import { ScrollView, Text, View } from 'react-native';
 
 import { SearchByNameButton, TakePhotoButton } from '../components/home';
 import ListButton from '../components/ListButton';
 
-const styles = StyleSheet.create({
+import Colors from '../constants/Colors';
+import Fonts from '../constants/Fonts';
+
+const styles = {
   container: {
     flex: 1,
     backgroundColor: Colors.torontoBackground,
@@ -18,6 +16,11 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: 36,
     letterSpacing: -1,
+  },
+  searchSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 90,
   },
   regularText: {
     fontFamily: Fonts.regular,
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
   hPadding: {
     paddingHorizontal: 30,
   },
-});
+};
 
 export default function HomeScreen(props) {
   const { screenProps, navigation } = props;
@@ -47,13 +50,7 @@ export default function HomeScreen(props) {
         <View style={{ ...styles.homeScreenSection, ...styles.hPadding }}>
           <Text style={styles.headerText}>Search</Text>
           <Text style={styles.regularText}>for an animal</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              height: 90,
-            }}
-          >
+          <View style={styles.searchSection}>
             <SearchByNameButton nav={navigation} />
             <TakePhotoButton nav={navigation} />
           </View>
@@ -168,10 +165,4 @@ export default function HomeScreen(props) {
 
 HomeScreen.navigationOptions = {
   header: null,
-};
-
-HomeScreen.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
 };

@@ -1,50 +1,23 @@
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import Colors from '../constants/Colors';
-import Fonts from '../constants/Fonts';
-import Layout from '../constants/Layout';
 
 import ListButton from '../components/ListButton';
 import SearchBar from '../components/SearchBar';
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     backgroundColor: Colors.torontoBackground,
   },
   header: {
-    flexDirection: 'row',
-    height: 120,
-    width: Layout.window.width,
-    alignItems: 'center',
+    backgroundColor: 'white',
+    height: 60,
+    borderBottomColor: Colors.torontoGrey,
+    borderBottomWidth: 2,
   },
-  headerText: {
-    fontFamily: Fonts.fun,
-    fontSize: 36,
-    letterSpacing: -1,
-    lineHeight: 36,
-    alignSelf: 'center',
-  },
-  headerCenter: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    height: 55,
-    width: 55,
-    marginTop: 20,
-    marginBottom: 5,
-  },
-});
+};
 
 export default class SearchScreen extends React.Component {
   constructor(props) {
@@ -85,14 +58,7 @@ export default class SearchScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View
-          style={{
-            backgroundColor: 'white',
-            height: 60,
-            borderBottomColor: Colors.torontoGrey,
-            borderBottomWidth: 2,
-          }}
-        >
+        <View style={styles.header}>
           <SearchBar onChange={this.updateResults} />
         </View>
         <ScrollView style={styles.container}>

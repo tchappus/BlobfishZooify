@@ -1,18 +1,19 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
+import { ScrollView, Text, View, Image } from 'react-native';
 
 import HtmlView from '../components/HtmlView';
-import Fonts from '../constants/Fonts';
-import Layout from '../constants/Layout';
+import * as Fetch from '../utils/Fetch';
 
-const styles = StyleSheet.create({
+import Fonts from '../constants/Fonts';
+import Window from '../constants/Window';
+
+const styles = {
   container: {
     flex: 1,
   },
   header: {
     flexDirection: 'row',
-    width: Layout.window.width,
+    width: Window.width,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
@@ -35,10 +36,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 75,
   },
-  webView: {
-    width: Layout.window.width,
-    height: 200,
-    flex: 1,
+  tagView: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginBottom: 20,
   },
   tag: {
     marginBottom: 10,
@@ -50,20 +51,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     fontSize: 18,
   },
-});
-
-async function getData(animal) {
-  const response = await fetch(
-    `https://wrapapi.com/use/rchappus/blobfish/getAnimal/latest?wrapAPIKey=D19qDTvra80XtAYgct5KqOdPy8cSohF0&animal=${animal}`,
-    {
-      method: 'GET',
-      mode: 'cors',
-    },
-  );
-  const resultRaw = await response.text();
-  const result = JSON.parse(resultRaw);
-  return result.data;
-}
+};
 
 export default class AnimalScreen extends React.Component {
   constructor(props) {
@@ -77,10 +65,12 @@ export default class AnimalScreen extends React.Component {
   componentWillMount() {
     const { navigation } = this.props;
     const { name } = navigation.state.params;
-    getData(name).then(result => {
+
+    Fetch.theTeaAbout(name).then(result => {
       const htmlContent = result.description
         .replace(name, 'Description')
         .replace('<img src="', '<img src="http://torontozoo.com');
+
       this.setState({ data: result, html: htmlContent });
     });
   }
@@ -100,13 +90,7 @@ export default class AnimalScreen extends React.Component {
             </View>
           </View>
           {data && (
-            <View
-              style={{
-                flexDirection: 'row',
-                alignSelf: 'center',
-                marginBottom: 20,
-              }}
-            >
+            <View style={styles.tagView}>
               <View style={{ marginRight: 20 }}>
                 <Text style={styles.tag}>Type: </Text>
                 <Text style={styles.tag}>Region: </Text>

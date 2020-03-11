@@ -1,16 +1,13 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import PropTypes from 'prop-types';
 
 import Fonts from '../constants/Fonts';
 import Colors from '../constants/Colors';
 
 const styles = {
   view: {
-    backgroundColor: 'white',
     height: '100%',
-    borderColor: Colors.torontoGrey,
     borderWidth: 2,
     borderRadius: 8,
     padding: 5,
@@ -18,37 +15,40 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  disabledView: {
-    backgroundColor: Colors.torontoGrey,
-    height: 40,
+  colors: {
+    backgroundColor: 'white',
     borderColor: Colors.torontoGrey,
-    borderWidth: 2,
-    borderRadius: 8,
-    padding: 5,
-    flexDirection: 'row',
-    justifyContent: 'center',
   },
-  disabledText: {
-    fontFamily: Fonts.regular,
-    fontSize: 24,
-    letterSpacing: -1,
-    color: 'white',
+  disabledColors: {
+    backgroundColor: Colors.torontoGrey,
+    borderColor: Colors.torontoGrey,
   },
   text: {
     fontFamily: Fonts.regular,
     fontSize: 24,
     letterSpacing: -1,
-    color: Colors.torontoGrey,
     width: '70%',
+  },
+  textColor: {
+    color: Colors.torontoGrey,
+  },
+  disabledTextColor: {
+    color: 'white',
   },
 };
 
 export default function BfButton(props) {
   const { icon, label, onPress, style, disabled } = props;
-  const viewStyle = disabled
-    ? { ...styles.disabledView, ...style }
-    : { ...styles.view, ...style };
-  const textStyle = disabled ? styles.disabledText : styles.text;
+
+  let viewStyle = { ...styles.view, ...style };
+  viewStyle = disabled
+    ? { ...styles.disabledColors, ...viewStyle }
+    : { ...styles.colors, ...viewStyle };
+
+  const textStyle = disabled
+    ? { ...styles.disabledTextColor, ...styles.text }
+    : { ...styles.textColor, ...styles.text };
+
   const iconColor = disabled ? 'white' : Colors.torontoGrey;
 
   return (
@@ -56,24 +56,10 @@ export default function BfButton(props) {
       <Ionicons
         name={icon}
         size={32}
-        style={{ marginBottom: 10, padding: 20 }}
+        style={{ paddingHorizontal: 20 }}
         color={iconColor}
       />
       <Text style={textStyle}>{label}</Text>
     </TouchableOpacity>
   );
 }
-
-BfButton.defaultProps = {
-  style: null,
-  disabled: false,
-};
-
-BfButton.propTypes = {
-  icon: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired,
-  disabled: PropTypes.bool,
-  // eslint-disable-next-line react/forbid-prop-types
-  style: PropTypes.object,
-};

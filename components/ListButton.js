@@ -1,17 +1,15 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Image, TouchableOpacity, Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 import Colors from '../constants/Colors';
 import Fonts from '../constants/Fonts';
-import Layout from '../constants/Layout';
+import Window from '../constants/Window';
 
 const styles = {
   view: {
     backgroundColor: 'white',
     height: 70,
-    width: Layout.window.width - 60,
+    width: Window.width - 60,
     borderColor: Colors.torontoGrey,
     borderWidth: 2,
     borderRadius: 8,
@@ -38,16 +36,12 @@ const styles = {
 export default function ListButton(props) {
   const { name, src, imgUrl, onPress } = props;
 
+  const imgSrc = src || { uri: imgUrl };
+
   return (
     <TouchableOpacity style={styles.view} onPress={onPress}>
-      {src && <Image source={src} style={styles.image} />}
-      {imgUrl && <Image source={{ uri: imgUrl }} style={styles.image} />}
+      <Image source={imgSrc} style={styles.image} />
       <Text style={styles.text}>{name}</Text>
     </TouchableOpacity>
   );
 }
-
-ListButton.propTypes = {
-  name: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired,
-};

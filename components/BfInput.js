@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import PropTypes from 'prop-types';
 
 import Fonts from '../constants/Fonts';
 import Colors from '../constants/Colors';
@@ -61,13 +60,3 @@ export default function BfInput(props) {
     </View>
   );
 }
-
-BfInput.defaultProps = {
-  onChange: () => {},
-};
-
-BfInput.propTypes = {
-  icon: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-};

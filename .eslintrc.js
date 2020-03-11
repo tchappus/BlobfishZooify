@@ -12,6 +12,10 @@ module.exports = {
     "node": true
   },
   "rules": {
+    "guard-for-in": 0,
+    "no-restricted-syntax": 0,
+    "react/prop-types": 0,
+    "react/forbid-prop-types": 0,
     "jsx-a11y/href-no-hash": ["off"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "global-require": ["off"],

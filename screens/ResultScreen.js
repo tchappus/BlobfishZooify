@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import Fonts from '../constants/Fonts';
+
 import BfButton from '../components/BfButton';
+
+import Fonts from '../constants/Fonts';
+import Window from '../constants/Window';
 
 const styles = {
   image: {
@@ -31,6 +31,11 @@ const styles = {
     fontSize: 36,
     letterSpacing: -1,
     marginBottom: 12,
+  },
+  button: {
+    height: 60,
+    width: Window.width / 2,
+    alignSelf: 'center',
   },
 };
 
@@ -88,6 +93,7 @@ export default class ResultScreen extends React.Component {
         <BfButton
           icon="ios-information-circle"
           label="Learn More"
+          style={styles.button}
           onPress={() => {
             navigation.navigate('Animal', {
               name: animal,

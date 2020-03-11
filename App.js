@@ -2,20 +2,19 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
 import Colors from './constants/Colors';
 import ZooData from './utils/ZooData';
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     backgroundColor: Colors.torontoBackground,
   },
-});
+};
 
 let animals = null;
 
@@ -35,7 +34,6 @@ async function loadResourcesAsync() {
       require('./assets/images/anicons/Wased-ashore-solid.png'),
     ]),
     Font.loadAsync({
-      // tab bar font
       ...Ionicons.font,
       'LibreFranklin-Bold': require('./assets/fonts/LibreFranklin-Bold.ttf'),
       'LibreFranklin-Medium': require('./assets/fonts/LibreFranklin-Medium.ttf'),
@@ -45,8 +43,6 @@ async function loadResourcesAsync() {
 }
 
 function handleLoadingError(error) {
-  // In this case, you might want to report the error to your error reporting
-  // service, for example Sentry
   // eslint-disable-next-line no-console
   console.warn(error);
 }
@@ -77,11 +73,3 @@ export default function App(props) {
     </View>
   );
 }
-
-App.propTypes = {
-  skipLoadingScreen: PropTypes.bool,
-};
-
-App.defaultProps = {
-  skipLoadingScreen: false,
-};

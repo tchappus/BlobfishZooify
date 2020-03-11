@@ -1,14 +1,13 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
+import { ScrollView, Text, View, Image } from 'react-native';
 
 import Colors from '../constants/Colors';
 import Fonts from '../constants/Fonts';
-import Layout from '../constants/Layout';
+import Window from '../constants/Window';
 
 import ListButton from '../components/ListButton';
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     backgroundColor: Colors.torontoBackground,
@@ -16,7 +15,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     height: 120,
-    width: Layout.window.width,
+    width: Window.width,
     alignItems: 'center',
   },
   headerText: {
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 5,
   },
-});
+};
 
 export default function ListScreen(props) {
   const { navigation } = props;

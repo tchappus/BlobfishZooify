@@ -3,7 +3,6 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
-import PropTypes from 'prop-types';
 
 import Colors from '../constants/Colors';
 
@@ -16,10 +15,16 @@ const styles = {
     borderWidth: 2,
     borderRadius: 40,
     padding: 10,
-    marginBottom: 20,
+    marginBottom: 30,
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-end',
+    justifyContent: 'center',
+  },
+  buttonOverlay: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
     justifyContent: 'center',
   },
 };
@@ -44,9 +49,11 @@ export default function CameraScreen(props) {
   if (hasPermission === null) {
     return <View />;
   }
+
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
   return (
     <View style={{ flex: 1 }}>
       <Camera
@@ -56,14 +63,7 @@ export default function CameraScreen(props) {
           camera = ref;
         }}
       >
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.buttonOverlay}>
           <TouchableOpacity
             style={styles.button}
             onPress={async () => {
@@ -78,9 +78,3 @@ export default function CameraScreen(props) {
     </View>
   );
 }
-
-CameraScreen.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
-};

@@ -1,15 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
-import PropTypes from 'prop-types';
 
 import BfButton from '../BfButton';
 
-import Layout from '../../constants/Layout';
+import Window from '../../constants/Window';
 
 const styles = {
   view: {
     marginTop: 10,
-    width: Layout.window.width / 2 - 40,
+    width: Window.width / 2 - 40,
   },
 };
 
@@ -25,9 +24,3 @@ export default function SearchByNameButton(props) {
     </View>
   );
 }
-
-SearchByNameButton.propTypes = {
-  nav: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
-};
