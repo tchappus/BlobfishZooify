@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import Fonts from '../constants/Fonts';
@@ -44,20 +45,31 @@ const styles = {
 
 export default function ListScreen(props) {
   const { navigation } = props;
-  const { image, title, items } = navigation.state.params;
+  const { image, icon, title, items } = navigation.state.params;
 
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container}>
         <View style={styles.header}>
           <View style={styles.headerCenter}>
-            <Image source={image} style={styles.image} />
+            {image && <Image source={image} style={styles.image} />}
+            {icon && (
+              <Ionicons
+                name={icon}
+                size={55}
+                style={styles.image}
+                color={Colors.torontoGrey}
+              />
+            )}
             <Text style={styles.headerText}>{title}</Text>
           </View>
         </View>
         <View style={{ paddingBottom: 40 }}>
           {Object.keys(items).map(key => {
-            const imgUrl = `http://torontozoo.com${items[key]}`;
+            const url = items[key];
+            const imgUrl = url.includes('http://torontozoo.com')
+              ? url
+              : `http://torontozoo.com${url}`;
             return (
               <ListButton
                 key={key}

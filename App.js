@@ -1,7 +1,7 @@
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import React, { useState } from 'react';
+import React from 'react';
 import { Platform, StatusBar, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -17,6 +17,7 @@ const styles = {
 };
 
 let animals = null;
+const discovered = [];
 
 async function loadResourcesAsync() {
   await Promise.all([
@@ -47,29 +48,45 @@ function handleLoadingError(error) {
   console.warn(error);
 }
 
-function handleFinishLoading(setLoadingComplete) {
-  setLoadingComplete(true);
+function addToDiscovered(name, image) {
+  discovered[name] = image;
 }
 
-export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
-  const { skipLoadingScreen } = props;
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    addToDiscovered.bind(this);
+    this.state = {
+      loadingComplete: false,
+    };
+  }
 
-  if (!isLoadingComplete && !skipLoadingScreen) {
+  render() {
+    const { loadingComplete } = this.state;
+    const { skipLoadingScreen } = this.props;
+
+    if (!loadingComplete && !skipLoadingScreen) {
+      return (
+        <AppLoading
+          startAsync={loadResourcesAsync}
+          onError={handleLoadingError}
+          onFinish={() => this.setState({ loadingComplete: true })}
+        />
+      );
+    }
+
+    const screenProps = {
+      // eslint-disable-next-line no-underscore-dangle
+      animals: animals._55,
+      discovered,
+      addToDiscovered,
+    };
+
     return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
+      <View style={styles.container}>
+        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+        <AppNavigator screenProps={screenProps} />
+      </View>
     );
   }
-  // eslint-disable-next-line no-underscore-dangle
-  animals = animals._55;
-  return (
-    <View style={styles.container}>
-      {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-      <AppNavigator screenProps={animals} />
-    </View>
-  );
 }

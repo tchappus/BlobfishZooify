@@ -31,7 +31,7 @@ export default class SearchScreen extends React.Component {
 
   componentWillMount() {
     const { screenProps } = this.props;
-    const dictionary = screenProps;
+    const dictionary = screenProps.animals;
     const results = [];
     for (const key in dictionary) {
       for (const animal in dictionary[key]) {

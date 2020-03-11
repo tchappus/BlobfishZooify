@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
 
+import BfButton from '../components/BfButton';
 import HtmlView from '../components/HtmlView';
 import * as Fetch from '../utils/Fetch';
 
@@ -51,6 +52,11 @@ const styles = {
     fontFamily: Fonts.regular,
     fontSize: 18,
   },
+  button: {
+    height: 70,
+    marginBottom: 10,
+    marginHorizontal: 30,
+  },
 };
 
 export default class AnimalScreen extends React.Component {
@@ -59,30 +65,46 @@ export default class AnimalScreen extends React.Component {
     this.state = {
       html: null,
       data: null,
+      thisIsDiscovered: false,
     };
   }
 
   componentWillMount() {
-    const { navigation } = this.props;
+    const { screenProps, navigation } = this.props;
     const { name } = navigation.state.params;
+    const { discovered } = screenProps;
 
     Fetch.theTeaAbout(name).then(result => {
-      const htmlContent = result.description
+      const htmlContent = `${result.description
         .replace(name, 'Description')
-        .replace('<img src="', '<img src="http://torontozoo.com');
+        .replace(
+          '<img src="',
+          '<img src="http://torontozoo.com',
+        )}<div>Information provided by the Toronto Zoo.<br /></div>`;
 
       this.setState({ data: result, html: htmlContent });
     });
+
+    for (const animal in discovered) {
+      if (animal === name) {
+        this.setState({ thisIsDiscovered: true });
+      }
+    }
   }
 
   render() {
-    const { html, data } = this.state;
-    const { navigation } = this.props;
-    const { name, image } = navigation.state.params;
+    const { html, data, thisIsDiscovered } = this.state;
+    const { screenProps, navigation } = this.props;
+    const { name, image, discover } = navigation.state.params;
+    const { addToDiscovered } = screenProps;
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container}>
+        <ScrollView
+          style={styles.container}
+          minimumZoomScale={1}
+          maximumZoomScale={5}
+        >
           <View style={styles.header}>
             <View style={styles.headerCenter}>
               <Image source={{ uri: image }} style={styles.image} />
@@ -99,6 +121,30 @@ export default class AnimalScreen extends React.Component {
                 <Text style={styles.tagValue}>{data.type}</Text>
                 <Text style={styles.tagValue}>{data.region}</Text>
               </View>
+            </View>
+          )}
+          {discover && !thisIsDiscovered && (
+            <View style={styles.button}>
+              <BfButton
+                icon="ios-compass"
+                label="Mark as Discovered"
+                style={styles.button}
+                onPress={() => {
+                  this.setState({ thisIsDiscovered: true });
+                  addToDiscovered(name, image);
+                }}
+              />
+            </View>
+          )}
+          {thisIsDiscovered && (
+            <View style={styles.button}>
+              <BfButton
+                disabled
+                icon="ios-compass"
+                label="Discovered"
+                style={styles.button}
+                onPress={() => {}}
+              />
             </View>
           )}
           {html && <HtmlView html={html} />}

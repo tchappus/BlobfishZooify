@@ -12,7 +12,6 @@ const styles = {
     borderRadius: 8,
     padding: 5,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   colors: {
@@ -27,7 +26,7 @@ const styles = {
     fontFamily: Fonts.regular,
     fontSize: 24,
     letterSpacing: -1,
-    width: '70%',
+    width: '75%',
   },
   textColor: {
     color: Colors.torontoGrey,
@@ -56,7 +55,7 @@ export default function BfButton(props) {
       <Ionicons
         name={icon}
         size={32}
-        style={{ paddingHorizontal: 20 }}
+        style={{ paddingLeft: 10, paddingRight: 20 }}
         color={iconColor}
       />
       <Text style={textStyle}>{label}</Text>

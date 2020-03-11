@@ -1,7 +1,11 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
-import { SearchByNameButton, TakePhotoButton } from '../components/home';
+import {
+  SearchByNameButton,
+  TakePhotoButton,
+  DiscoveredSpeciesButton,
+} from '../components/home';
 import ListButton from '../components/ListButton';
 
 import Colors from '../constants/Colors';
@@ -40,6 +44,7 @@ const styles = {
 
 export default function HomeScreen(props) {
   const { screenProps, navigation } = props;
+  const { animals, discovered } = screenProps;
 
   return (
     <View style={styles.container}>
@@ -54,6 +59,7 @@ export default function HomeScreen(props) {
             <SearchByNameButton nav={navigation} />
             <TakePhotoButton nav={navigation} />
           </View>
+          <DiscoveredSpeciesButton nav={navigation} discovered={discovered} />
         </View>
         <View style={styles.homeScreenSection}>
           <Text style={{ ...styles.headerText, ...styles.hPadding }}>
@@ -68,7 +74,7 @@ export default function HomeScreen(props) {
                   navigation,
                   image: require('../assets/images/anicons/anicons-African-Savanna.png'),
                   title: 'Africa',
-                  items: screenProps.africa,
+                  items: animals.africa,
                 });
               }}
             />
@@ -80,7 +86,7 @@ export default function HomeScreen(props) {
                   navigation,
                   image: require('../assets/images/anicons/anicons-Americas.png'),
                   title: 'Americas',
-                  items: screenProps.americas,
+                  items: animals.americas,
                 });
               }}
             />
@@ -92,7 +98,7 @@ export default function HomeScreen(props) {
                   navigation,
                   image: require('../assets/images/anicons/anicons-Australasia.png'),
                   title: 'Australasia',
-                  items: screenProps.australasia,
+                  items: animals.australasia,
                 });
               }}
             />
@@ -104,7 +110,7 @@ export default function HomeScreen(props) {
                   navigation,
                   image: require('../assets/images/anicons/anicons-Canadian-DOmain.png'),
                   title: 'Canada',
-                  items: screenProps.canada,
+                  items: animals.canada,
                 });
               }}
             />
@@ -116,7 +122,7 @@ export default function HomeScreen(props) {
                   navigation,
                   image: require('../assets/images/anicons/anicons-Discovery-Zone.png'),
                   title: 'Discovery',
-                  items: screenProps.discovery,
+                  items: animals.discovery,
                 });
               }}
             />
@@ -128,7 +134,7 @@ export default function HomeScreen(props) {
                   navigation,
                   image: require('../assets/images/anicons/anicons-Eurasia-Wilds.png'),
                   title: 'Eurasia',
-                  items: screenProps.eurasia,
+                  items: animals.eurasia,
                 });
               }}
             />
@@ -140,7 +146,7 @@ export default function HomeScreen(props) {
                   navigation,
                   image: require('../assets/images/anicons/anicons-Indo-Malaya.png'),
                   title: 'Indo-Malaya',
-                  items: screenProps.indomalaya,
+                  items: animals['indo-malaya'],
                 });
               }}
             />
@@ -152,7 +158,7 @@ export default function HomeScreen(props) {
                   navigation,
                   image: require('../assets/images/anicons/anicons-Tundra-Trek.png'),
                   title: 'Tundra',
-                  items: screenProps.tundra,
+                  items: animals.tundra,
                 });
               }}
             />
