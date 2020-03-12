@@ -26,10 +26,11 @@ async function theTeaAbout(animal) {
 }
 
 async function theAnimalThatIsInThis(picture) {
-  const uriParts = picture.split('.');
+  const uri = picture;
+  const uriParts = uri.split('.');
   const fileType = uriParts[uriParts.length - 1];
   const image = {
-    picture,
+    uri,
     type: `image/${fileType}`,
     name: `photo.${fileType}`,
   };
@@ -38,7 +39,7 @@ async function theAnimalThatIsInThis(picture) {
   formData.append('image', image);
 
   const response = await fetch(
-    'https://zooify20200130112611.azurewebsites.net/api/values',
+    'http://ec2-18-218-238-147.us-east-2.compute.amazonaws.com',
     {
       method: 'POST',
       mode: 'cors',

@@ -14,11 +14,10 @@ const styles = {
   },
   header: {
     flexDirection: 'row',
-    width: Window.width,
+    width: Window.width - 60,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 40,
+    margin: 30,
   },
   headerText: {
     fontFamily: Fonts.bold,
@@ -41,6 +40,8 @@ const styles = {
     flexDirection: 'row',
     alignSelf: 'center',
     marginBottom: 20,
+    marginHorizontal: 30,
+    maxWidth: Window.width - 60,
   },
   tag: {
     marginBottom: 10,
@@ -49,6 +50,7 @@ const styles = {
   },
   tagValue: {
     marginBottom: 10,
+    paddingRight: 30,
     fontFamily: Fonts.regular,
     fontSize: 18,
   },

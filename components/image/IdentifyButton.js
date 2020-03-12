@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import BfButton from '../BfButton';
-// import * as Fetch from '../../utils/Fetch';
+import * as Fetch from '../../utils/Fetch';
 
 import Window from '../../constants/Window';
 
@@ -15,6 +15,7 @@ const styles = {
 export default function IdentifyButton(props) {
   const { uri, nav } = props;
   const [identifying, setIdentifying] = useState(false);
+
   if (!identifying) {
     return (
       <BfButton
@@ -23,9 +24,10 @@ export default function IdentifyButton(props) {
         label="Identify"
         onPress={async () => {
           setIdentifying(true);
-          // const result = await Fetch.theAnimalThatIsInThis(uri);
+          const result = await Fetch.theAnimalThatIsInThis(uri);
+          console.log(result);
           setIdentifying(false);
-          nav.navigate('Result', { uri, result: 'americanMoose' });
+          nav.navigate('Result', { uri, result });
         }}
       />
     );
@@ -35,7 +37,7 @@ export default function IdentifyButton(props) {
       disabled
       style={styles.button}
       icon="ios-cloud-circle"
-      label="Identifying..."
+      label="Please Wait..."
       onPress={() => {}}
     />
   );
