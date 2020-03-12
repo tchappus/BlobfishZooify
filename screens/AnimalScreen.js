@@ -97,7 +97,7 @@ export default class AnimalScreen extends React.Component {
   render() {
     const { html, data, thisIsDiscovered } = this.state;
     const { screenProps, navigation } = this.props;
-    const { name, image, discover } = navigation.state.params;
+    const { name, image, discover, showBack } = navigation.state.params;
     const { addToDiscovered } = screenProps;
 
     return (
@@ -146,6 +146,18 @@ export default class AnimalScreen extends React.Component {
                 label="Discovered"
                 style={styles.button}
                 onPress={() => {}}
+              />
+            </View>
+          )}
+          {showBack && (
+            <View style={styles.button}>
+              <BfButton
+                icon="ios-camera"
+                label="Back to Camera"
+                style={styles.button}
+                onPress={() => {
+                  navigation.navigate('Camera');
+                }}
               />
             </View>
           )}

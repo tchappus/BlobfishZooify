@@ -16,8 +16,10 @@ const styles = {
   view: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
     paddingHorizontal: 30,
+  },
+  innerView: {
+    justifyContent: 'center',
     alignItems: 'center',
   },
   headerText: {
@@ -32,10 +34,13 @@ const styles = {
     letterSpacing: -1,
     marginBottom: 12,
   },
+  buttonOverlay: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 90,
+  },
   button: {
-    height: 70,
-    width: Window.width / 2 - 20,
-    alignSelf: 'center',
+    width: Window.width / 2 - 40,
   },
 };
 
@@ -71,7 +76,7 @@ export default class ResultScreen extends React.Component {
           value
             .replace(/\s/g, '')
             .toUpperCase()
-            .includes(result.toUpperCase())
+            .includes(result.split(',')[0].toUpperCase())
         ) {
           animal = value;
           image = animals[key][value];
@@ -88,21 +93,34 @@ export default class ResultScreen extends React.Component {
 
     return (
       <View style={styles.view}>
-        <Image source={{ uri }} style={styles.image} resizeMode="cover" />
-        <Text style={styles.regularText}>Identified Specimen:</Text>
-        {animal && <Text style={styles.headerText}>{animal}</Text>}
-        <BfButton
-          icon="ios-compass"
-          label="Discover"
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate('Animal', {
-              name: animal,
-              discover: true,
-              image: `http://torontozoo.com${image}`,
-            });
-          }}
-        />
+        <View style={styles.innerView}>
+          <Image source={{ uri }} style={styles.image} resizeMode="cover" />
+          <Text style={styles.regularText}>Identified Specimen:</Text>
+          {animal && <Text style={styles.headerText}>{animal}</Text>}
+        </View>
+        <View style={styles.buttonOverlay}>
+          <BfButton
+            icon="ios-camera"
+            label="Back to Camera"
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Camera');
+            }}
+          />
+          <BfButton
+            icon="ios-compass"
+            label="Discover"
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Animal', {
+                name: animal,
+                discover: true,
+                showBack: true,
+                image: `http://torontozoo.com${image}`,
+              });
+            }}
+          />
+        </View>
       </View>
     );
   }

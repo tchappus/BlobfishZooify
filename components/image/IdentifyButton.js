@@ -25,7 +25,6 @@ export default function IdentifyButton(props) {
         onPress={async () => {
           setIdentifying(true);
           const result = await Fetch.theAnimalThatIsInThis(uri);
-          console.log(result);
           setIdentifying(false);
           nav.navigate('Result', { uri, result });
         }}

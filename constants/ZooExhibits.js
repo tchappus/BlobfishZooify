@@ -2,7 +2,7 @@ export default {
   canada: ['Canadian Domain'],
   africa: ['African Rainforest Pavilion', 'African Savanna'],
   americas: ['Americas Pavilion', 'Mayan Temple Ruins'],
-  australasia: ['Australasian Pavilion', 'Australasia Outdoor'],
+  australasia: ['Australasia Pavilion', 'Australasia Outdoor'],
   discovery: ['Waterside Theatre', 'Kids Zoo'],
   eurasia: ['Eurasia Wilds'],
   'indo-malaya': [
