@@ -35,6 +35,5 @@ export default async function GetTheAnimals() {
     );
   }
 
-  console.log(animals);
   return animals;
 }

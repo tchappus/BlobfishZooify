@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "mocha -r esm --timeout 100000"
   },
   "jest": {
     "preset": "jest-expo"
@@ -15,6 +15,7 @@
     "@expo/samples": "~3.0.3",
     "@expo/vector-icons": "^10.0.3",
     "@react-navigation/web": "^1.0.0-alpha.9",
+    "esm": "^3.2.25",
     "expo": "^35.0.0",
     "expo-asset": "^7.0.0",
     "expo-camera": "~7.0.0",
@@ -23,6 +24,9 @@
     "expo-image-manipulator": "~7.0.0",
     "expo-permissions": "~7.0.0",
     "expo-web-browser": "^7.0.0",
+    "form-data": "^3.0.0",
+    "mocha": "^7.1.1",
+    "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-dom": "16.8.3",

@@ -24,7 +24,20 @@ export default function IdentifyButton(props) {
         label="Identify"
         onPress={async () => {
           setIdentifying(true);
-          const result = await Fetch.theAnimalThatIsInThis(uri);
+
+          // create formData and make identify request
+          const uriParts = uri.split('.');
+          const fileType = uriParts[uriParts.length - 1];
+          const image = {
+            uri,
+            type: `image/${fileType}`,
+            name: `photo.${fileType}`,
+          };
+          const formData = new FormData();
+          formData.append('image', image);
+
+          const result = await Fetch.theAnimalThatIsInThis(formData);
+
           setIdentifying(false);
           nav.navigate('Result', { uri, result });
         }}

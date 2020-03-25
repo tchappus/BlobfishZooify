@@ -26,27 +26,12 @@ async function theTeaAbout(animal) {
 }
 
 async function theAnimalThatIsInThis(picture) {
-  const uri = picture;
-  const uriParts = uri.split('.');
-  const fileType = uriParts[uriParts.length - 1];
-  const image = {
-    uri,
-    type: `image/${fileType}`,
-    name: `photo.${fileType}`,
-  };
-
-  const formData = new FormData();
-  formData.append('image', image);
-
   const response = await fetch(
-    'http://ec2-18-218-238-147.us-east-2.compute.amazonaws.com',
+    'http://ec2-13-58-200-200.us-east-2.compute.amazonaws.com',
     {
       method: 'POST',
       mode: 'cors',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      body: formData,
+      body: picture,
     },
   );
 
