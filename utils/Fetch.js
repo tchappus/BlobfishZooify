@@ -27,7 +27,7 @@ async function theTeaAbout(animal) {
 
 async function theAnimalThatIsInThis(picture) {
   const response = await fetch(
-    'http://ec2-13-58-200-200.us-east-2.compute.amazonaws.com',
+    'http://ec2-3-14-11-5.us-east-2.compute.amazonaws.com',
     {
       method: 'POST',
       mode: 'cors',

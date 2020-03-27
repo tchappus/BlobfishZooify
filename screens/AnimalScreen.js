@@ -1,12 +1,14 @@
 import React from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
 
-import BfButton from '../components/BfButton';
-import HtmlView from '../components/HtmlView';
 import * as Fetch from '../utils/Fetch';
-
 import Fonts from '../constants/Fonts';
 import Window from '../constants/Window';
+import {
+  DiscoveredButton,
+  BackToCameraButton,
+  HtmlView,
+} from '../components/animal';
 
 const styles = {
   container: {
@@ -67,14 +69,12 @@ export default class AnimalScreen extends React.Component {
     this.state = {
       html: null,
       data: null,
-      thisIsDiscovered: false,
     };
   }
 
   componentWillMount() {
-    const { screenProps, navigation } = this.props;
+    const { navigation } = this.props;
     const { name } = navigation.state.params;
-    const { discovered } = screenProps;
 
     Fetch.theTeaAbout(name).then(result => {
       const htmlContent = `${result.description
@@ -86,19 +86,13 @@ export default class AnimalScreen extends React.Component {
 
       this.setState({ data: result, html: htmlContent });
     });
-
-    for (const animal in discovered) {
-      if (animal === name) {
-        this.setState({ thisIsDiscovered: true });
-      }
-    }
   }
 
   render() {
-    const { html, data, thisIsDiscovered } = this.state;
+    const { html, data } = this.state;
     const { screenProps, navigation } = this.props;
-    const { name, image, discover, showBack } = navigation.state.params;
     const { addToDiscovered } = screenProps;
+    const { name, image, discover, showBack } = navigation.state.params;
 
     return (
       <View style={styles.container}>
@@ -125,41 +119,19 @@ export default class AnimalScreen extends React.Component {
               </View>
             </View>
           )}
-          {discover && !thisIsDiscovered && (
-            <View style={styles.button}>
-              <BfButton
-                icon="ios-compass"
-                label="Mark as Discovered"
-                style={styles.button}
-                onPress={() => {
-                  this.setState({ thisIsDiscovered: true });
-                  addToDiscovered(name, image);
-                }}
-              />
-            </View>
-          )}
-          {thisIsDiscovered && (
-            <View style={styles.button}>
-              <BfButton
-                disabled
-                icon="ios-compass"
-                label="Discovered"
-                style={styles.button}
-                onPress={() => {}}
-              />
-            </View>
+          {discover && (
+            <DiscoveredButton
+              styles={styles.button}
+              addToDiscovered={addToDiscovered}
+              name={name}
+              image={image}
+            />
           )}
           {showBack && (
-            <View style={styles.button}>
-              <BfButton
-                icon="ios-camera"
-                label="Back to Camera"
-                style={styles.button}
-                onPress={() => {
-                  navigation.navigate('Camera');
-                }}
-              />
-            </View>
+            <BackToCameraButton
+              styles={styles.button}
+              navigation={navigation}
+            />
           )}
           {html && <HtmlView html={html} />}
         </ScrollView>

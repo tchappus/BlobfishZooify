@@ -2,8 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import HTML from 'react-native-render-html';
 
-import Window from '../constants/Window';
-import Fonts from '../constants/Fonts';
+import Window from '../../constants/Window';
+import Fonts from '../../constants/Fonts';
 
 const styles = {
   container: {

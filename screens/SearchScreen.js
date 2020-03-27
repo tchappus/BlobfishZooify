@@ -2,9 +2,7 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 
 import Colors from '../constants/Colors';
-
-import ListButton from '../components/ListButton';
-import SearchBar from '../components/SearchBar';
+import { SearchBar, ListView } from '../components/search';
 
 const styles = {
   container: {
@@ -62,27 +60,7 @@ export default class SearchScreen extends React.Component {
           <SearchBar onChange={this.updateResults} />
         </View>
         <ScrollView style={styles.container}>
-          {results && (
-            <View style={{ paddingBottom: 40 }}>
-              {results.map(result => {
-                const imgUrl = `http://torontozoo.com${result.image}`;
-                return (
-                  <ListButton
-                    key={result.name}
-                    name={result.name}
-                    imgUrl={imgUrl}
-                    onPress={() => {
-                      navigation.navigate('Animal', {
-                        navigation,
-                        image: imgUrl,
-                        name: result.name,
-                      });
-                    }}
-                  />
-                );
-              })}
-            </View>
-          )}
+          {results && <ListView navigation={navigation} results={results} />}
         </ScrollView>
       </View>
     );
