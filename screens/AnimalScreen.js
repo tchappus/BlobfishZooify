@@ -92,7 +92,7 @@ export default class AnimalScreen extends React.Component {
     const { html, data } = this.state;
     const { screenProps, navigation } = this.props;
     const { addToDiscovered } = screenProps;
-    const { name, image, discover, showBack } = navigation.state.params;
+    const { name, image, discover } = navigation.state.params;
 
     return (
       <View style={styles.container}>
@@ -120,18 +120,18 @@ export default class AnimalScreen extends React.Component {
             </View>
           )}
           {discover && (
-            <DiscoveredButton
-              styles={styles.button}
-              addToDiscovered={addToDiscovered}
-              name={name}
-              image={image}
-            />
-          )}
-          {showBack && (
-            <BackToCameraButton
-              styles={styles.button}
-              navigation={navigation}
-            />
+            <View>
+              <DiscoveredButton
+                styles={styles.button}
+                addToDiscovered={addToDiscovered}
+                name={name}
+                image={image}
+              />
+              <BackToCameraButton
+                styles={styles.button}
+                navigation={navigation}
+              />
+            </View>
           )}
           {html && <HtmlView html={html} />}
         </ScrollView>

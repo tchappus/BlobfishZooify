@@ -1,9 +1,5 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 
 import StackNaviGator from './StackNavigator';
 
-export default createAppContainer(
-  createSwitchNavigator({
-    Main: StackNaviGator,
-  }),
-);
+export default createAppContainer(StackNaviGator);

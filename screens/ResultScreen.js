@@ -45,17 +45,6 @@ const styles = {
 };
 
 export default class ResultScreen extends React.Component {
-  static findMatch(result, dictionary) {
-    for (const key in dictionary) {
-      for (const animal in dictionary[key]) {
-        if (animal.includes(result)) {
-          return { animal: dictionary[key] };
-        }
-      }
-    }
-    return null;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -115,7 +104,6 @@ export default class ResultScreen extends React.Component {
               navigation.navigate('Animal', {
                 name: animal,
                 discover: true,
-                showBack: true,
                 image: `http://torontozoo.com${image}`,
               });
             }}
